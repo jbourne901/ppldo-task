@@ -1,0 +1,39 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppConfig = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+const log_1 = require("./utils/log");
+class AppConfig {
+    constructor() {
+        dotenv_1.default.config({ debug: true });
+        this._port = Number.parseInt(process.env.PORT || "3001");
+        this._host = process.env.HOST || "0.0.0.0";
+        this._pplDoApiUrl = process.env.PPLDO_API_URL || "";
+        this._pplDoChatId = process.env.PPLDO_CHAT_ID || "";
+        if (!this._pplDoApiUrl) {
+            log_1.error("Please specify PPLDO_API_URL in .env");
+            process.exit(-1);
+        }
+        if (!this._pplDoChatId) {
+            log_1.error("Please specify PPLDO_CHAT_ID in .env");
+            process.exit(-1);
+        }
+    }
+    port() {
+        return this._port;
+    }
+    host() {
+        return this._host;
+    }
+    pplDoApiUrl() {
+        return this._pplDoApiUrl;
+    }
+    pplDoChatId() {
+        return this._pplDoChatId;
+    }
+}
+exports.AppConfig = AppConfig;
+//# sourceMappingURL=config.js.map
