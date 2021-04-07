@@ -22,6 +22,12 @@ export class App {
         this.config = config;
         this.app = express();
 
+        this.app.set("port", this.config.port());
+
+        this.app.use(morgan("dev"));
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({extended: true}));
+
         const notification = new NotificationService();
 
         const pplDoController = new PpldoController(config);
@@ -37,11 +43,7 @@ export class App {
     public start() {
         try {
 
-            this.app.set("port", this.config.port());
 
-            this.app.use(morgan("dev"));
-            this.app.use(express.json());
-            this.app.use(express.urlencoded({extended: true}));
 
             const httpServer = http.createServer(this.app);
 
