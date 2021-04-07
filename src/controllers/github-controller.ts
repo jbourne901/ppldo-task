@@ -11,7 +11,7 @@ export class GithubController implements IGithubController {
         this.service = service;
         const router = express.Router();
         router.post(GithubResource.EVENT, async (req: Request, _res: Response, _next: NextFunction) => {
-            debug(`router.get ${GithubResource.EVENT} req.body=`, req.body)
+            debug(`router.post ${GithubResource.EVENT} req.body=`, req.body)
             try {
                 await this.service.handleEvent(req.body);
             } catch(err) {
