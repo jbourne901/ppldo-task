@@ -17,7 +17,7 @@ export class PpldoService implements IPppldoService {
     }
 
     protected getEventNotificationMessage(event: IEvent, payload: IEventPayload) {
-        return "test message";
+        return payload;
     }
 
     protected async handleEvent(event: IEvent, payload: IEventPayload) {
