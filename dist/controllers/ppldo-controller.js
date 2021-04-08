@@ -6,7 +6,8 @@ const log_1 = require("../utils/log");
 class PpldoController {
     constructor(config) {
         this.config = config;
-        this.client = new graphql_request_1.GraphQLClient(config.pplDoApiUrl(), { headers: {} });
+        const headers = { Bearer: this.config.pplDoApiToken() };
+        this.client = new graphql_request_1.GraphQLClient(config.pplDoApiUrl(), { headers });
         log_1.debug("PpldoController: started");
     }
     async sendMessage(message) {
@@ -21,11 +22,13 @@ class PpldoController {
                 }
             }
         `;
+        log_1.debug(`Sending ${message} to ppldo service`);
         try {
             const newTextMessageInput = { message };
             const newMessageInput = { text_message: newTextMessageInput };
             const vars = { chat_id: this.config.pplDoChatId(), input: [newMessageInput] };
-            const res = await this.client.request(query, vars);
+            const headers = { Bearer: this.config.pplDoApiToken() };
+            const res = await this.client.request(query, vars, headers);
             log_1.debug(`res=`, res);
         }
         catch (err) {

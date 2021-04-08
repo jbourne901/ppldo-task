@@ -16,7 +16,8 @@ export class PpldoController implements IpplDoController {
 
     public constructor(config: AppConfig) {
         this.config = config;
-        this.client = new GraphQLClient(config.pplDoApiUrl(), {headers: {}});
+        const headers = {Bearer: this.config.pplDoApiToken()};
+        this.client = new GraphQLClient(config.pplDoApiUrl(), {headers});
         debug("PpldoController: started");
     }
 
@@ -32,11 +33,13 @@ export class PpldoController implements IpplDoController {
                 }
             }
         `;
+        debug(`Sending ${message} to ppldo service`);
         try {
             const newTextMessageInput: NewTextMessageInput = {message};
             const newMessageInput: NewMessageInput = {text_message: newTextMessageInput};
             const vars: ISendMessagePayload = {chat_id: this.config.pplDoChatId(), input: [newMessageInput]}
-            const res = await this.client.request<IMessageId, ISendMessagePayload>(query, vars);
+            const headers = {Bearer: this.config.pplDoApiToken()} ;
+            const res = await this.client.request<IMessageId, ISendMessagePayload>(query, vars, headers);
             debug(`res=`, res)
         } catch (err) {
             error(err);

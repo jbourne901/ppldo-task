@@ -13,12 +13,17 @@ class AppConfig {
         this._host = process.env.HOST || "0.0.0.0";
         this._pplDoApiUrl = process.env.PPLDO_API_URL || "";
         this._pplDoChatId = process.env.PPLDO_CHAT_ID || "";
+        this._pplDoApiToken = process.env.PPLDO_API_TOKEN || "";
         if (!this._pplDoApiUrl) {
             log_1.error("Please specify PPLDO_API_URL in .env");
             process.exit(-1);
         }
         if (!this._pplDoChatId) {
             log_1.error("Please specify PPLDO_CHAT_ID in .env");
+            process.exit(-1);
+        }
+        if (!this._pplDoApiToken) {
+            log_1.error("Please specify PPLDO_API_TOKEN in .env");
             process.exit(-1);
         }
     }
@@ -33,6 +38,9 @@ class AppConfig {
     }
     pplDoChatId() {
         return this._pplDoChatId;
+    }
+    pplDoApiToken() {
+        return this._pplDoApiToken;
     }
 }
 exports.AppConfig = AppConfig;
