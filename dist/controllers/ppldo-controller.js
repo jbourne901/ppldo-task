@@ -27,7 +27,7 @@ class PpldoController {
             const newTextMessageInput = { message };
             const newMessageInput = { text_message: newTextMessageInput };
             const vars = { chat_id: this.config.pplDoChatId(), input: [newMessageInput] };
-            const headers = { Bearer: this.config.pplDoApiToken() };
+            const headers = { Authorization: `Bearer ${this.config.pplDoApiToken()}` };
             const res = await this.client.request(query, vars, headers);
             log_1.debug(`res=`, res);
         }

@@ -11,11 +11,10 @@ class PpldoService {
         log_1.debug("PpldoService: started");
     }
     getEventNotificationMessage(event, payload) {
-        return payload;
+        return "test message";
     }
     async handleEvent(event, payload) {
         const message = this.getEventNotificationMessage(event, payload);
-        debug("pplDoService - send message ", message);
         try {
             this.controller.sendMessage(message);
         }
