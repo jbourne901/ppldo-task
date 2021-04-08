@@ -11,7 +11,7 @@ class PpldoService {
         log_1.debug("PpldoService: started");
     }
     getEventNotificationMessage(event, payload) {
-        return "test message";
+        return payload;
     }
     async handleEvent(event, payload) {
         const message = this.getEventNotificationMessage(event, payload);
