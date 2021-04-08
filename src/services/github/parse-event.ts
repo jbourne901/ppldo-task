@@ -19,7 +19,7 @@ const formatPushTs = (githubPushTs: number|undefined) => {
 
 const formatCommit = (commit: IGithubCommit) => {
     const user = commit.committer?.name || UNKNOWN_USER;
-    return `${user}: ${commit.message}`;
+    return `${user}: "${commit.message}"`;
 };
 
 const formatCommits = (commits: IGithubCommit[]|undefined) => {
@@ -46,7 +46,7 @@ export const parseEvent = (payload: IGithubEventPayload) => {
         const user = payload.pusher.name||UNKNOWN_USER;
         const ts = formatPushTs(payload.repository?.pushed_at);
         const commits = formatCommits(payload.commits).join("\n");
-        return `${ts}: ${user} выполнил push в репозиторий ${repository} коммиты ${commits}`;
+        return `${ts}: ${user} выполнил push в репозиторий ${repository} коммиты: [ ${commits} ]`;
     } else if(payload.issue) {
         const action = formatIssueAction(payload.action);
         const ts = payload.issue.closed_at || payload.issue.created_at || payload.issue.updated_at || UNKNOWN_TS;
