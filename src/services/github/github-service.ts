@@ -1,19 +1,23 @@
-import {GITHUB_EVENT, IGithubEventPayload, IGithubEventService} from "../../interfaces/github";
+import {GITHUB_EVENT, IEventParser, IGithubEventPayload, IGithubEventService} from "../../interfaces/github";
 import {debug, error} from "../../utils/log";
 import {INotificationService} from "../../interfaces/event";
-import {parseEvent} from "./parse-event";
+import {AppConfig} from "../../config";
 
 
 export class GithubService implements IGithubEventService {
+    private config: AppConfig;
     private notification: INotificationService;
+    private parser: IEventParser;
 
-    public constructor(notification: INotificationService) {
+    public constructor(config: AppConfig, parser: IEventParser, notification: INotificationService) {
+        this.config=config;
+        this.parser=parser;
         this.notification = notification;
         debug("GithubService: started");
     }
 
     public async handleEvent(payload: IGithubEventPayload) {
-        const message = parseEvent(payload);
+        const message = this.parser.parseEvent(payload);
         try {
             this.notification.notify(GITHUB_EVENT, message);
         } catch(err) {

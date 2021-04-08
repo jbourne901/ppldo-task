@@ -14,6 +14,7 @@ const github_controller_1 = require("./controllers/github-controller");
 const config_1 = require("./config");
 const ppldo_service_1 = require("./services/ppldo-service");
 const notification_1 = require("./services/notification");
+const event_parser_1 = require("./services/github/event-parser");
 class App {
     constructor(config) {
         this.config = config;
@@ -25,7 +26,8 @@ class App {
         const notification = new notification_1.NotificationService();
         const pplDoController = new ppldo_controller_1.PpldoController(config);
         this.pplDoService = new ppldo_service_1.PpldoService(notification, pplDoController);
-        const githubService = new github_service_1.GithubService(notification);
+        const eventParser = new event_parser_1.EventParser(config);
+        const githubService = new github_service_1.GithubService(config, eventParser, notification);
         this.githubController = new github_controller_1.GithubController(this.app, githubService);
         log_1.debug("App: initialized");
     }

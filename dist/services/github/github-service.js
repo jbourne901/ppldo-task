@@ -3,14 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GithubService = void 0;
 const github_1 = require("../../interfaces/github");
 const log_1 = require("../../utils/log");
-const parse_event_1 = require("./parse-event");
 class GithubService {
-    constructor(notification) {
+    constructor(config, parser, notification) {
+        this.config = config;
+        this.parser = parser;
         this.notification = notification;
         log_1.debug("GithubService: started");
     }
     async handleEvent(payload) {
-        const message = parse_event_1.parseEvent(payload);
+        const message = this.parser.parseEvent(payload);
         try {
             this.notification.notify(github_1.GITHUB_EVENT, message);
         }

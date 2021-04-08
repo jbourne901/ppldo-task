@@ -1,12 +1,15 @@
 import dotenv from "dotenv";
 import {error} from "./utils/log";
 
+const DEFAULT_LOCALE = "ru";
+
 export class AppConfig {
     private _port: number;
     private _host: string;
     private _pplDoApiUrl: string;
     private _pplDoChatId: string;
     private _pplDoApiToken: string;
+    private _locale: string;
 
     constructor() {
         dotenv.config( { debug: true } );
@@ -15,6 +18,7 @@ export class AppConfig {
         this._pplDoApiUrl=process.env.PPLDO_API_URL||"";
         this._pplDoChatId=process.env.PPLDO_CHAT_ID||"";
         this._pplDoApiToken = process.env.PPLDO_API_TOKEN||"";
+        this._locale = process.env.LOCALE || DEFAULT_LOCALE;
         if(!this._pplDoApiUrl) {
             error("Please specify PPLDO_API_URL in .env");
             process.exit(-1);
@@ -43,6 +47,9 @@ export class AppConfig {
     }
     public pplDoApiToken() {
         return this._pplDoApiToken;
+    }
+    public locale() {
+        return this._locale;
     }
 
 }

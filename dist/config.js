@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const log_1 = require("./utils/log");
+const DEFAULT_LOCALE = "ru";
 class AppConfig {
     constructor() {
         dotenv_1.default.config({ debug: true });
@@ -14,6 +15,7 @@ class AppConfig {
         this._pplDoApiUrl = process.env.PPLDO_API_URL || "";
         this._pplDoChatId = process.env.PPLDO_CHAT_ID || "";
         this._pplDoApiToken = process.env.PPLDO_API_TOKEN || "";
+        this._locale = process.env.LOCALE || DEFAULT_LOCALE;
         if (!this._pplDoApiUrl) {
             log_1.error("Please specify PPLDO_API_URL in .env");
             process.exit(-1);
@@ -41,6 +43,9 @@ class AppConfig {
     }
     pplDoApiToken() {
         return this._pplDoApiToken;
+    }
+    locale() {
+        return this._locale;
     }
 }
 exports.AppConfig = AppConfig;

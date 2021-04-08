@@ -46,5 +46,9 @@ export interface IGithubController {
 
 }
 
+export interface IEventParser {
+    parseEvent (payload: IGithubEventPayload): string;
+}
+
 
 export const GITHUB_EVENT: IEvent = "github-event";

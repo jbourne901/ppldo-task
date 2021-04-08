@@ -10,6 +10,7 @@ import {PpldoService} from "./services/ppldo-service";
 import {NotificationService} from "./services/notification";
 import {IPppldoService} from "./interfaces/ppldo";
 import {IGithubController} from "./interfaces/github";
+import {EventParser} from "./services/github/event-parser";
 
 export class App {
 
@@ -33,7 +34,8 @@ export class App {
         const pplDoController = new PpldoController(config);
         this.pplDoService = new PpldoService(notification, pplDoController);
 
-        const githubService = new GithubService(notification);
+        const eventParser = new EventParser(config)
+        const githubService = new GithubService(config, eventParser, notification);
         this.githubController = new GithubController(this.app, githubService);
 
         debug("App: initialized");
@@ -42,9 +44,6 @@ export class App {
 
     public start() {
         try {
-
-
-
             const httpServer = http.createServer(this.app);
 
             httpServer.listen(this.config.port(), this.config.host(), () => {
