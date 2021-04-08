@@ -10,7 +10,9 @@ export class PpldoService implements IPppldoService {
     public constructor(notification: INotificationService, controller: IpplDoController) {
         this.controller=controller;
         this.notification = notification;
-        this.handlerId = this.notification.subscribe(ALL_EVENTS, this.handleEvent);
+        this.handlerId = this.notification.subscribe(ALL_EVENTS,
+            (event: IEvent, payload: IEventPayload) => this.handleEvent(event, payload)
+        );
         debug("PpldoService: started");
     }
 

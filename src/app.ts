@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import {debug, error, log} from "./utils/log";
 import morgan from "morgan";
-import {GithubService} from "./services/github-service";
+import {GithubService} from "./services/github/github-service";
 import {PpldoController} from "./controllers/ppldo-controller";
 import {GithubController} from "./controllers/github-controller";
 import {AppConfig} from "./config";

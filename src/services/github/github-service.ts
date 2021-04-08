@@ -1,6 +1,8 @@
-import {IGithubEventPayload, IGithubEventService, UNKNOWN_EVENT} from "../interfaces/github";
-import {debug, error} from "../utils/log";
-import {INotificationService} from "../interfaces/event";
+import {GITHUB_EVENT, IGithubEventPayload, IGithubEventService} from "../../interfaces/github";
+import {debug, error} from "../../utils/log";
+import {INotificationService} from "../../interfaces/event";
+import {parseEvent} from "./parse-event";
+
 
 export class GithubService implements IGithubEventService {
     private notification: INotificationService;
@@ -11,10 +13,9 @@ export class GithubService implements IGithubEventService {
     }
 
     public async handleEvent(payload: IGithubEventPayload) {
-        let event = payload.event || UNKNOWN_EVENT;
-        const eventData = payload;
+        const message = parseEvent(payload);
         try {
-            this.notification.notify(event, eventData);
+            this.notification.notify(GITHUB_EVENT, message);
         } catch(err) {
             error(err);
         }

@@ -7,7 +7,7 @@ class PpldoService {
     constructor(notification, controller) {
         this.controller = controller;
         this.notification = notification;
-        this.handlerId = this.notification.subscribe(event_1.ALL_EVENTS, this.handleEvent);
+        this.handlerId = this.notification.subscribe(event_1.ALL_EVENTS, (event, payload) => this.handleEvent(event, payload));
         log_1.debug("PpldoService: started");
     }
     getEventNotificationMessage(event, payload) {

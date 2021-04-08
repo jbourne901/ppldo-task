@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const log_1 = require("./utils/log");
 const morgan_1 = __importDefault(require("morgan"));
-const github_service_1 = require("./services/github-service");
+const github_service_1 = require("./services/github/github-service");
 const ppldo_controller_1 = require("./controllers/ppldo-controller");
 const github_controller_1 = require("./controllers/github-controller");
 const config_1 = require("./config");
@@ -18,6 +18,10 @@ class App {
     constructor(config) {
         this.config = config;
         this.app = express_1.default();
+        this.app.set("port", this.config.port());
+        this.app.use(morgan_1.default("dev"));
+        this.app.use(express_1.default.json());
+        this.app.use(express_1.default.urlencoded({ extended: true }));
         const notification = new notification_1.NotificationService();
         const pplDoController = new ppldo_controller_1.PpldoController(config);
         this.pplDoService = new ppldo_service_1.PpldoService(notification, pplDoController);
@@ -27,10 +31,6 @@ class App {
     }
     start() {
         try {
-            this.app.set("port", this.config.port());
-            this.app.use(morgan_1.default("dev"));
-            this.app.use(express_1.default.json());
-            this.app.use(express_1.default.urlencoded({ extended: true }));
             const httpServer = http_1.default.createServer(this.app);
             httpServer.listen(this.config.port(), this.config.host(), () => {
                 log_1.debug(`listening ${this.config.host()}:${this.config.port()}`);

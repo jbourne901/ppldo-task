@@ -12,8 +12,8 @@ class GithubController {
     constructor(app, service) {
         this.service = service;
         const router = express_1.default.Router();
-        router.get(github_1.GithubResource.EVENT, async (req, _res, _next) => {
-            log_1.debug(`router.get ${github_1.GithubResource.EVENT} req.body=`, req.body);
+        router.post(github_1.GithubResource.EVENT, async (req, _res, _next) => {
+            log_1.debug(`router.post ${github_1.GithubResource.EVENT} req.body=`, req.body);
             try {
                 await this.service.handleEvent(req.body);
             }

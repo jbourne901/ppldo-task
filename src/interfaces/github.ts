@@ -1,11 +1,42 @@
+/**
+ * REST API endpoints ресурсы для Git webhook
+ */
+import {IEvent} from "./event";
+
 export enum GithubResource {
-    EVENT="/event",
+    EVENT="/event",   //события
+}
+
+export type IGithubCommit = {
+    message: string;
+    committer: {
+        name: string;
+    };
 }
 
 
-//TODO
-// we dont know what comes from github yet, change to a type later
-export type IGithubEventPayload = any;
+export type IGithubEventPayload = {
+    repository?: {
+        name: string;
+        pushed_at?: number;
+    },
+    action?: string;
+    issue?: {
+        title: string;
+        body: string;
+        created_at?: string;
+        updated_at?: string;
+        closed_at?: string;
+        user?: {
+            login: string;
+        }
+    };
+    pusher?: {
+        name: string;
+    };
+    commits?: IGithubCommit[];
+}
+
 
 export interface IGithubEventService {
     handleEvent(payload: IGithubEventPayload): Promise<void>;
@@ -15,4 +46,5 @@ export interface IGithubController {
 
 }
 
-export const UNKNOWN_EVENT = "Unknown Event";
+
+export const GITHUB_EVENT: IEvent = "github-event";
