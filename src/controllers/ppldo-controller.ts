@@ -38,7 +38,7 @@ export class PpldoController implements IpplDoController {
             const newTextMessageInput: NewTextMessageInput = {message};
             const newMessageInput: NewMessageInput = {text_message: newTextMessageInput};
             const vars: ISendMessagePayload = {chat_id: this.config.pplDoChatId(), input: [newMessageInput]}
-            const headers = {Authorization: `Bearer: ${this.config.pplDoApiToken()}`} ;
+            const headers = {Authorization: `Bearer ${this.config.pplDoApiToken()}`} ;
             const res = await this.client.request<IMessageId, ISendMessagePayload>(query, vars, headers);
             debug(`res=`, res)
         } catch (err) {
