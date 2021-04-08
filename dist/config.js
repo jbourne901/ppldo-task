@@ -7,6 +7,10 @@ exports.AppConfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const log_1 = require("./utils/log");
 const DEFAULT_LOCALE = "ru";
+/**
+ * Извлекает из .env и хранит конфигурационные параметры
+ * См описание списка параметров в Readme.md
+ */
 class AppConfig {
     constructor() {
         dotenv_1.default.config({ debug: true });

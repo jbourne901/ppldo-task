@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * Обертки над стандартными функциями консольного логирования, чтобы впоследствие можно было заменить на что-то более удобное
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.warn = exports.debug = exports.error = exports.log = void 0;
 exports.log = console.log;

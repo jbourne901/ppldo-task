@@ -15,7 +15,17 @@ const config_1 = require("./config");
 const ppldo_service_1 = require("./services/ppldo-service");
 const notification_1 = require("./services/notification");
 const event_parser_1 = require("./services/github/event-parser");
+/**
+ * Основной класс приложения
+ * Создает Express инстанс, контроллеры, сервисы, связывает все между собой, запускает сервер
+ *
+ */
 class App {
+    /**
+     * Инициализация приложения, создает инстанс Express, добавляет middlewares, создает сервисы и контроллеры
+     * связывает все между собой
+     * @param config - конфиг приложения
+     */
     constructor(config) {
         this.config = config;
         this.app = express_1.default();
@@ -31,6 +41,9 @@ class App {
         this.githubController = new github_controller_1.GithubController(this.app, githubService);
         log_1.debug("App: initialized");
     }
+    /**
+     * Запуск сервера
+     */
     start() {
         try {
             const httpServer = http_1.default.createServer(this.app);

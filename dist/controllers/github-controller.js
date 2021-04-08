@@ -8,6 +8,10 @@ const express_1 = __importDefault(require("express"));
 const api_resource_1 = require("../interfaces/api-resource");
 const github_1 = require("../interfaces/github");
 const log_1 = require("../utils/log");
+/**
+ * Отвечает за прием REST запросов (webhooks) на endpoint GITHUB и передачу их в GithubEventService для дальнейшей обработки
+ * На запросы не отсылает никакого ответа поскольку это webhook и ответа не ожидается
+ */
 class GithubController {
     constructor(app, service) {
         this.service = service;
