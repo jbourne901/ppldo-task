@@ -39,11 +39,11 @@ const ACTION_ISSUE_CREATED = "создал issue";
 const ACTION_ISSUE_CLOSED = "закрыл issue";
 
 /**
- * Шаблоны формата строк для разных видом вобытий
+ * Шаблоны формата строк для разных видом cобытий
  */
-const PUSH_TEMPLATE = "${ts}: ${user} выполнил push в репозиторий ${repository} коммиты: [ ${commits} ]";
-const ISSUE_TEMPLATE = "${ts}: ${user} ${action} \"${title}\" в репозитории ${repository}";
-const COMMIT_TEMPLATE = "${user}: \"${commit.message}\"";
+const PUSH_TEMPLATE = "{ts}: {user} выполнил push в репозиторий {repository} коммиты: [ {commits} ]";
+const ISSUE_TEMPLATE = "{ts}: {user} {action} \"{title}\" в репозитории {repository}";
+const COMMIT_TEMPLATE = "{user}: \"{message}\"";
 /**
  * Список переменных для передачи в formatString
  */
