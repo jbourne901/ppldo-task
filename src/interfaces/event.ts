@@ -1,11 +1,13 @@
 export type IEvent=string;
+
+// Константа которую нужно передать при подписке на события, если подписчик заинтересован во всех событиях без фильтрации
 export const ALL_EVENTS: IEvent = "*";
 
-//TODO - add more event types
+//TODO - добавить другие типы событий
 export type IOtherEventPayload = any;
 
 /**
- * Данные, полученные от контроллера, мы заранее не знаем их тип
+ * Данные, полученные от контроллера (т.е. изначально от Github), мы заранее не знаем их тип
  */
 export type IEventPayload = any;
 

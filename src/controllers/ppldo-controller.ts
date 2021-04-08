@@ -1,6 +1,6 @@
 import {GraphQLClient, gql} from 'graphql-request'
 import {AppConfig} from "../config";
-import {IChatId, IMessageId, IpplDoController, IPppldoService} from "../interfaces/ppldo";
+import {IChatId, IMessageId, IpplDoController} from "../interfaces/ppldo";
 import {debug, error} from "../utils/log";
 import {NewMessageInput, NewTextMessageInput} from "../generated/graphql";
 
@@ -9,6 +9,14 @@ export type ISendMessagePayload = {
     input: [NewMessageInput];
 }
 
+/**
+ * Отвечает за отправку сообщений в чат PPLDO через GraphQL API PPLDO
+ * Сообщения для отправки приходят из PpldoService
+ * Параметры API конфигурируются в .env: строка url, токен
+ * При успешной отправке получает на выходе node id, с которым ничего не делает, просто выводит в лог
+ * При ошибке отправки выводит в лог сообщение об ошибке.
+ * TODO: реализовать надежную доставку сообщений (с конфигурированием количества попыток и интервала между ними)
+ */
 export class PpldoController implements IpplDoController {
 
     private client: GraphQLClient;

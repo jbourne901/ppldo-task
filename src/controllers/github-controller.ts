@@ -3,6 +3,10 @@ import {ApiResource} from "../interfaces/api-resource";
 import {GithubResource, IGithubController, IGithubEventService} from "../interfaces/github";
 import {debug, error} from "../utils/log";
 
+/**
+ * Отвечает за прием REST запросов (webhooks) на endpoint GITHUB и передачу их в GithubEventService для дальнейшей обработки
+ * На запросы не отсылает никакого ответа поскольку это webhook и ответа не ожидается
+ */
 export class GithubController implements IGithubController {
     private service: IGithubEventService;
 

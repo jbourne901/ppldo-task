@@ -3,6 +3,10 @@ import {error} from "./utils/log";
 
 const DEFAULT_LOCALE = "ru";
 
+/**
+ * Извлекает из .env и хранит конфигурационные параметры
+ * См описание списка параметров в Readme.md
+ */
 export class AppConfig {
     private _port: number;
     private _host: string;

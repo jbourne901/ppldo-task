@@ -1,15 +1,21 @@
 Technology stack:
 
 Node.js / Typescript
-octokit for github webhooks
-
-Deployment platfrom.
-
-Options considered: 
-  Yandex functions - requires personal data (phone number) - rejected
-  AWS lambda - requires personal data (credit card number, phone number) - rejected
-  VPS hosting (Linux VPS) - selected
 
 
+Платформа для деплоймента:
 
+Рассмотрены опции: 
+  Yandex functions - требует указания персональных данных при регистрации (тел.номер), по этой причине не выбрал
+  AWS lambda -  требует указания персональных данных при регистрации  (кред карты, тел номер) , по этой причине не выбрал
+  VPS hosting (Linux VPS) - выбрал его, потому что есть опыт разворачивания node.js сервисов под linux 
+
+
+Библиотеки:
+
+* graphql-request - минималистичный GraphQL клиент для Node.js. Выбран как наиболее простой и быстрый вариант
+для отправки graphql запросов с сервера. Поддерживает graphQL запросы и аутентификацию через Http заголовки.
+  Автоматически переотправлять сообщения при ошибках не умеет.
+  TODO: поисследовать другие GraphQL клиенты, например Apollo.
+  
 

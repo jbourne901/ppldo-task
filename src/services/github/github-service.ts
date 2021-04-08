@@ -3,7 +3,11 @@ import {debug, error} from "../../utils/log";
 import {INotificationService} from "../../interfaces/event";
 import {AppConfig} from "../../config";
 
-
+/**
+ * Отвечает за прием запросов GithubController, и их обработку
+ * Обработка заключается в формировании строки сообщения о событии и посылке события GITHUB_EVENT вместе
+ * со сформированной строкой всем подписанным слушателям через NotificationService
+ */
 export class GithubService implements IGithubEventService {
     private config: AppConfig;
     private notification: INotificationService;
@@ -15,6 +19,14 @@ export class GithubService implements IGithubEventService {
         this.notification = notification;
         debug("GithubService: started");
     }
+
+    /**
+     * Обработчик запроса, вызывается из express роутера при получении запроса /github/event
+     * Разбирает объект, определяет тип события, подготавливает строку с информацией о событии и
+     * передает ее подписчикам на событие GITHUB_EVENT через NotificationService.
+     * @param payload объект , который приходит в запросе от github hook
+     *
+     */
 
     public async handleEvent(payload: IGithubEventPayload) {
         const message = this.parser.parseEvent(payload);

@@ -12,6 +12,12 @@ import {IPppldoService} from "./interfaces/ppldo";
 import {IGithubController} from "./interfaces/github";
 import {EventParser} from "./services/github/event-parser";
 
+
+/**
+ * Основной класс приложения
+ * Создает Express инстанс, контроллеры, сервисы, связывает все между собой, запускает сервер
+ *
+ */
 export class App {
 
     private config: AppConfig;
@@ -19,6 +25,11 @@ export class App {
     private pplDoService: IPppldoService;
     private githubController: IGithubController;
 
+    /**
+     * Инициализация приложения, создает инстанс Express, добавляет middlewares, создает сервисы и контроллеры
+     * связывает все между собой
+     * @param config - конфиг приложения
+     */
     public constructor(config: AppConfig) {
         this.config = config;
         this.app = express();
@@ -42,6 +53,9 @@ export class App {
     }
 
 
+    /**
+     * Запуск сервера
+     */
     public start() {
         try {
             const httpServer = http.createServer(this.app);

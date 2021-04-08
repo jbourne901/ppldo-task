@@ -2,6 +2,9 @@ import {IpplDoController, IPppldoService} from "../interfaces/ppldo";
 import {ALL_EVENTS, IEvent, IEventHandlerId, IEventPayload, INotificationService} from "../interfaces/event";
 import {debug, error} from "../utils/log";
 
+/**
+ * Получает события через NotificationService и вызывает PplDoCOntroller для отправки сообщений в чат
+ */
 export class PpldoService implements IPppldoService {
     private notification: INotificationService;
     private controller: IpplDoController;
@@ -16,10 +19,22 @@ export class PpldoService implements IPppldoService {
         debug("PpldoService: started");
     }
 
+    /**
+     * Дополнительная обработка сообщения перед отправкой (пока не реализована, возращаем строку как есть)
+     * @param event имя события (пока события только от Github, но данный сервис может принимать любые события)
+     * @param payload данные связанные с событием (для Github это строка сообщения о событии)
+     * @protected
+     */
     protected getEventNotificationMessage(event: IEvent, payload: IEventPayload) {
         return payload;
     }
 
+    /**
+     * Вызывается при наступлении
+     * @param event
+     * @param payload
+     * @protected
+     */
     protected async handleEvent(event: IEvent, payload: IEventPayload) {
         const message = this.getEventNotificationMessage(event, payload)
         try {
