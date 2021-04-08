@@ -6,16 +6,30 @@ const UNKNOWN_USER = "Неизвестный пользователь";
 const UNKNOWN_ISSUE_ACTION = "изменил issue";
 const UNKNOWN_EVENT = "Неизвестное событие";
 
+const formatDate = (d: Date) => {
+    return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+}
+
 const formatPushTs = (githubPushTs: number|undefined) => {
     if(githubPushTs) {
         const ts = githubPushTs;
         if(ts) {
             const d = new Date(ts * 1000);  //github присылает pushed_at без миллисекунд
-            return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+            return formatDate(d);
         }
     }
     return UNKNOWN_TS;
 };
+
+const formatTs = (githubTs: string|undefined) => {
+    if(githubTs) {
+        const d = new Date(githubTs);
+        if(d.toString()!=="Invalid Date") {
+            return formatDate(d);
+        }
+    }
+    return UNKNOWN_TS;
+}
 
 const formatCommit = (commit: IGithubCommit) => {
     const user = commit.committer?.name || UNKNOWN_USER;
@@ -49,10 +63,11 @@ export const parseEvent = (payload: IGithubEventPayload) => {
         return `${ts}: ${user} выполнил push в репозиторий ${repository} коммиты: [ ${commits} ]`;
     } else if(payload.issue) {
         const action = formatIssueAction(payload.action);
-        const ts = payload.issue.closed_at || payload.issue.created_at || payload.issue.updated_at || UNKNOWN_TS;
+        const ts = formatTs(payload.issue.closed_at || payload.issue.created_at || payload.issue.updated_at);
+
         const title = payload.issue.title;
         const user = payload.issue.user?.login || UNKNOWN_USER;
-        return `${ts}: ${user} ${action} ${title} в репозитории ${repository}`;
+        return `${ts}: ${user} ${action} "${title}" в репозитории ${repository}`;
     }
     return UNKNOWN_EVENT;
 }
