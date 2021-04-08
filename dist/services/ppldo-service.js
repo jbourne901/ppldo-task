@@ -15,6 +15,7 @@ class PpldoService {
     }
     async handleEvent(event, payload) {
         const message = this.getEventNotificationMessage(event, payload);
+        debug("pplDoService - send message ", message);
         try {
             this.controller.sendMessage(message);
         }
