@@ -11,5 +11,5 @@ var GithubResource;
 /**
  * константа, обозначающая события Github event (для подписки на него)
  */
-exports.GITHUB_EVENT = "github-event";
-//# sourceMappingURL=github.js.map
+exports.GITHUB_EVENT = "service-event";
+//# sourceMappingURL=service.js.map

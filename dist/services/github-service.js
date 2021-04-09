@@ -20,4 +20,4 @@ class GithubService {
     }
 }
 exports.GithubService = GithubService;
-//# sourceMappingURL=github-service.js.map
+//# sourceMappingURL=service-service.js.map

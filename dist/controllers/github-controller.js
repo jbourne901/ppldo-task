@@ -30,4 +30,4 @@ class GithubController {
     }
 }
 exports.GithubController = GithubController;
-//# sourceMappingURL=github-controller.js.map
+//# sourceMappingURL=service-controller.js.map

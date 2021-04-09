@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import {error} from "./utils/log";
+import {error} from "./components/shared/utils/log";
 
 const DEFAULT_LOCALE = "ru";
 

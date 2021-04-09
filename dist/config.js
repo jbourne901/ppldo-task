@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
-const log_1 = require("./utils/log");
+const log_1 = require("./components/shared/utils/log");
 const DEFAULT_LOCALE = "ru";
 /**
  * Извлекает из .env и хранит конфигурационные параметры

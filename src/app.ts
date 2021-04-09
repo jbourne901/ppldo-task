@@ -1,16 +1,16 @@
 import express from "express";
 import http from "http";
-import {debug, error, log} from "./utils/log";
+import {debug, error, log} from "./components/shared/utils/log";
 import morgan from "morgan";
-import {GithubService} from "./services/github/github-service";
-import {PpldoController} from "./controllers/ppldo-controller";
-import {GithubController} from "./controllers/github-controller";
+import {GithubService} from "./components/github/service/github-service";
+import {PpldoController} from "./components/chat-service/ppldo-controller";
+import {GithubController} from "./components/github/github-controller";
 import {AppConfig} from "./config";
-import {PpldoService} from "./services/ppldo-service";
-import {NotificationService} from "./services/notification";
-import {IPppldoService} from "./interfaces/ppldo";
-import {IGithubController} from "./interfaces/github";
-import {EventParser} from "./services/github/event-parser";
+import {PpldoService} from "./components/chat-service/ppldo-service";
+import {NotificationService} from "./components/shared/services/notification";
+import {IPppldoService} from "./components/chat-service/ppldo";
+import {IGithubController} from "./components/github/github";
+import {EventParser} from "./components/github/service/event-parser";
 
 
 /**

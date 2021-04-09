@@ -10,7 +10,7 @@ const formatPushTs = (githubPushTs) => {
     if (githubPushTs) {
         const ts = githubPushTs;
         if (ts) {
-            const d = new Date(ts * 1000); //github присылает pushed_at без миллисекунд
+            const d = new Date(ts * 1000); //service присылает pushed_at без миллисекунд
             return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
         }
     }

@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
-const log_1 = require("./utils/log");
+const log_1 = require("./components/shared/utils/log");
 const morgan_1 = __importDefault(require("morgan"));
-const github_service_1 = require("./services/github/github-service");
-const ppldo_controller_1 = require("./controllers/ppldo-controller");
-const github_controller_1 = require("./controllers/github-controller");
+const github_service_1 = require("./components/github/service/github-service");
+const ppldo_controller_1 = require("./components/chat-service/ppldo-controller");
+const github_controller_1 = require("./components/github/github-controller");
 const config_1 = require("./config");
-const ppldo_service_1 = require("./services/ppldo-service");
-const notification_1 = require("./services/notification");
-const event_parser_1 = require("./services/github/event-parser");
+const ppldo_service_1 = require("./components/chat-service/ppldo-service");
+const notification_1 = require("./components/shared/services/notification");
+const event_parser_1 = require("./components/github/service/event-parser");
 /**
  * Основной класс приложения
  * Создает Express инстанс, контроллеры, сервисы, связывает все между собой, запускает сервер

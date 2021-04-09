@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "ts-node src/test-app.ts",
+    "test": "ts-node src/test/test-app.ts",
     "build": "tsc",
     "graphql-codegen": "graphql-codegen --config codegen.yml"
   },

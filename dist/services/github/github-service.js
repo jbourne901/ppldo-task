@@ -16,10 +16,10 @@ class GithubService {
         log_1.debug("GithubService: started");
     }
     /**
-     * Обработчик запроса, вызывается из express роутера при получении запроса /github/event
+     * Обработчик запроса, вызывается из express роутера при получении запроса /service/event
      * Разбирает объект, определяет тип события, подготавливает строку с информацией о событии и
      * передает ее подписчикам на событие GITHUB_EVENT через NotificationService.
-     * @param payload объект , который приходит в запросе от github hook
+     * @param payload объект , который приходит в запросе от service hook
      *
      */
     async handleEvent(payload) {
@@ -33,4 +33,4 @@ class GithubService {
     }
 }
 exports.GithubService = GithubService;
-//# sourceMappingURL=github-service.js.map
+//# sourceMappingURL=service-service.js.map
