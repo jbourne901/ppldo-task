@@ -47,6 +47,7 @@ export class TestApp {
             debug("It should produce result: PASSED");
         }
         if(expected.query !== result?.query.toString()) {
+            console.log(result?.query.toString())
             throw Error("Query should match expected: FAILED")
         } else {
             debug("Query should match expected: PASSED");

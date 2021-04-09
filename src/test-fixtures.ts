@@ -202,7 +202,8 @@ export const testFixtures = (config: AppConfig) =>  [
                 }
         },
         result: {
-            query: '',
+            query: "    \\n                newMessages2( chat_id: $chat_id, input: $input) {\\n                    edges {\\n                        node {\\n                            id\\n                        }\\n                    }\\n                }\\n            }\\n        \"\n" +
+                "'\\n            mutation NEW_MESSAGE($chat_id: ID!, $input: [NewMessageInput!]!) {\\n                newMessages2( chat_id: $chat_id, input: $input) {\\n                    edges {\\n                        node {\\n                            id\\n                        }\\n                    }\\n                }\\n            }\\n        '\n",
             vars: {chat_id: config.pplDoChatId(),
                    input: input1
             },
@@ -210,3 +211,9 @@ export const testFixtures = (config: AppConfig) =>  [
         },
     }
 ];
+
+
+
+
+
+
