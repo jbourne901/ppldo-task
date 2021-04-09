@@ -8,8 +8,14 @@ import {NotificationService} from "./services/notification";
 import express from "express";
 import {MockGithubController} from "./controllers/mock-github-controller";
 import {IPpplDoTestResult, MockPpldoController} from "./controllers/mock-ppldo-controller";
-import {IGithubEventPayload} from "./interfaces/github";
 import {TestStorage} from "./interfaces/test";
+import {testFixtures} from "./test-fixtures";
+import {IGithubEventPayload} from "./interfaces/github";
+
+type ITestFixture = {
+    githubData: IGithubEventPayload;
+    result: IPpplDoTestResult;
+}
 
 export class TestApp {
 
@@ -67,37 +73,23 @@ export class TestApp {
         }
     }
 
-    public async start() {
+    public async test(fixture: ITestFixture) {
         debug("App: started");
 
-        const testObj: IGithubEventPayload = {
-
-        };
-
-        const message = "";
-
-        const expected: IPpplDoTestResult = {
-            query: `
-                    mutation NEW_MESSAGE($chat_id: ID!, $input: [NewMessageInput!]!) {
-                        newMessages2( chat_id: $chat_id, input: $input) {
-                            edges {
-                                node {
-                                    id
-                                }
-                            }
-                        }
-                    }`,
-            vars: {chat_id: this.config.pplDoChatId(), input: [{text_message: {message}}]},
-            headers: {Authorization: "Bearer "+config.pplDoApiToken()}
-        };
-
         try {
-            await this.githubController.test(testObj);
-            this.checkTestResult(expected);
+            await this.githubController.test(fixture.githubData);
+            this.checkTestResult(fixture.result);
         } catch(err) {
             error(err);
         }
 
+    }
+
+    public runSuite() {
+        const fixtures = testFixtures(this.config)
+        for(let fixture of fixtures) {
+            this.test(fixture);
+        }
     }
 }
 
@@ -105,6 +97,6 @@ export class TestApp {
 
 const config = new AppConfig();
 const app = new TestApp(config);
-app.start();
+app.runSuite();
 
 
